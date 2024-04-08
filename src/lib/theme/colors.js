@@ -2,7 +2,7 @@ import { defaultTheme } from "@xstyled/styled-components";
 
 export const baseColors = {
   ...defaultTheme.colors,
-  primaryHighEmphasis: "#2AABEE",
+  primaryHighEmphasis: "#f5b23b",
   primaryMediumEmphasis: "#2AABEEB8",
   primaryLowEmphasis: "#2AABEE7A",
   primaryDisabled: "#2AABEE52",
@@ -11,7 +11,7 @@ export const baseColors = {
   primary300: "#2AABEE14",
   primary200: "#2AABEE0D",
   primary100: "#2AABEE08",
-  secondaryHighEmphasis: "#0CCFCF",
+  secondaryHighEmphasis: "#b49b33",
   secondaryMediumEmphasis: "#0CCFCFB8",
   secondaryLowEmphasis: "#0CCFCF7A",
   secondaryDisabled: "#0CCFCF52",
@@ -77,9 +77,9 @@ export const lightColors = {
 
 export const darkColors = {
   ...baseColors,
-  successHighEmphasis: "#74DE9F",
-  backgroundHighEmphasis: "#07071C",
-  backgroundMediumEmphasis: "#191A33",
+  successHighEmphasis: "#f5b23b",
+  backgroundHighEmphasis: "#061c21",
+  backgroundMediumEmphasis: "#0D272E",
   backgroundLowEmphasis: "#2B2E4A",
   backgroundDisabled: "#292D3F52",
   background500: "#292D3F30",
