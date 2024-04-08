@@ -1,7 +1,1 @@
-<svg width="158" height="108" viewBox="0 0 158 108" fill="none" xmlns="http://www.w3.org/2000/svg">
-<path fill-rule="evenodd" clip-rule="evenodd" d="M148 108H10C4.47716 108 0 103.523 0 98V10C0 4.47715 4.47716 0 10 0H148C153.523 0 158 4.47715 158 10V98C158 103.523 153.523 108 148 108ZM148 104C151.314 104 154 101.314 154 98V10C154 6.68629 151.314 4 148 4H10C6.68629 4 4 6.68629 4 10V98C4 101.314 6.68629 104 10 104H148Z" fill="black"/>
-<path d="M35 55H4V51H35V55Z" fill="black"/>
-<path d="M119 55H39V51H119V55Z" fill="black"/>
-<path d="M123 4V104H119V4H123Z" fill="black"/>
-<path d="M39 4V104H35V4H39Z" fill="black"/>
-</svg>
+<svg fill="none" height="108" viewBox="0 0 158 108" width="158" xmlns="http://www.w3.org/2000/svg"><g fill="#000"><path clip-rule="evenodd" d="m148 108h-138c-5.52284 0-10-4.477-10-10v-88c0-5.52285 4.47716-10 10-10h138c5.523 0 10 4.47715 10 10v88c0 5.523-4.477 10-10 10zm0-4c3.314 0 6-2.686 6-6v-88c0-3.31371-2.686-6-6-6h-138c-3.31371 0-6 2.68629-6 6v88c0 3.314 2.68629 6 6 6z" fill-rule="evenodd"/><path d="m35 55h-31v-4h31z"/><path d="m119 55h-80v-4h80z"/><path d="m123 4v100h-4v-100z"/><path d="m39 4v100h-4v-100z"/></g></svg>
