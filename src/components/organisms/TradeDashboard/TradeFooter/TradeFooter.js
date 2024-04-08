@@ -55,24 +55,24 @@ export default function TradeFooter() {
       </Text>
       <StyledLinkBox>
         <SocialWrapper>
+          {/*<SocialLink*/}
+          {/*  target="_blank"*/}
+          {/*  rel="noreferrer"*/}
+          {/*  href="https://discord.gg/zigzag"*/}
+          {/*>*/}
+          {/*  <DiscordIcon />*/}
+          {/*</SocialLink>*/}
+          {/*<SocialLink*/}
+          {/*  target="_blank"*/}
+          {/*  rel="noreferrer"*/}
+          {/*  href="https://twitter.com/ZigZagExchange"*/}
+          {/*>*/}
+          {/*  <TwitterIcon />*/}
+          {/*</SocialLink>*/}
           <SocialLink
             target="_blank"
             rel="noreferrer"
-            href="https://discord.gg/zigzag"
-          >
-            <DiscordIcon />
-          </SocialLink>
-          <SocialLink
-            target="_blank"
-            rel="noreferrer"
-            href="https://twitter.com/ZigZagExchange"
-          >
-            <TwitterIcon />
-          </SocialLink>
-          <SocialLink
-            target="_blank"
-            rel="noreferrer"
-            href="https://t.me/zigzagexchange"
+            href="https://t.me/zklite_exchange"
           >
             <TelegramIcon />
           </SocialLink>

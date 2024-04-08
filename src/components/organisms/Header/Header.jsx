@@ -20,7 +20,7 @@ import {
   ExternalLinkIcon,
   TelegramIcon,
   TwitterIcon,
-  MenuIcon,
+  MenuIcon, GithubIcon
 } from "components/atoms/Svg";
 import ToggleTheme from "components/molecules/Toggle/ToggleTheme";
 import LanguageDropdown from "./LangaugeDropdown";
@@ -80,31 +80,31 @@ const supportLists = [
   },
   {
     text: "GitHub",
-    url: "https://github.com/ZigZagExchange/",
+    url: "https://github.com/zklite-exchange/",
     icon: <FaGithub size={14} />,
   },
-  {
-    text: "uptime_status",
-    url: "https://status.zigzag.exchange/",
-    icon: <MdSignalCellularAlt size={14} />,
-  },
+  // {
+  //   text: "uptime_status",
+  //   url: "https://status.zigzag.exchange/",
+  //   icon: <MdSignalCellularAlt size={14} />,
+  // },
   {
     text: "contact",
-    url: "https://zigzag.exchange/#contact",
+    url: "https://t.me/zklite_exchange",
     icon: <MdOutlineContactMail size={14} />,
   },
 ];
 
 const communityLists = [
+  // {
+  //   text: "governance",
+  //   url: "https://forum.zigzaglabs.io/t/zigzag-exchange",
+  //   icon: <MdAccountBalance size={14} />,
+  // },
   {
-    text: "governance",
-    url: "https://forum.zigzaglabs.io/t/zigzag-exchange",
-    icon: <MdAccountBalance size={14} />,
-  },
-  {
-    text: "blog",
-    url: "https://blog.zigzag.exchange/",
-    icon: <MdCreate size={14} />,
+    text: "Telegram",
+    url: "https://t.me/zklite_exchange",
+    icon: <TelegramIcon size={14} />,
   },
 ];
 
@@ -173,7 +173,7 @@ const SocialWrapper = styled.div`
   grid-auto-flow: column;
   align-items: center;
   justify-items: center;
-  width: 120px;
+  width: 200px;
 `;
 
 const LanguageWrapper = styled.div`
@@ -191,8 +191,11 @@ const SocialLink = styled.a`
   }
 
   svg path {
-    fill: ${({ theme }) => theme.colors.foregroundLowEmphasis};
+      fill: ${({ theme }) => theme.colors.foregroundLowEmphasis};
   }
+    svg {
+        display: inline-block;
+    }
 `;
 
 const VerticalDivider = styled.div`
@@ -377,7 +380,7 @@ export const Header = (props) => {
         <>
           <LogoWrapper>
             <Link to="/">
-              <img src={logo} alt="logo" height="32" />
+              <img src={logo} alt="logo" style={{height: '32px', width: 'auto'}} />
             </Link>
           </LogoWrapper>
           <ButtonWrapper>
@@ -397,7 +400,7 @@ export const Header = (props) => {
         <>
           <NavWrapper>
             <Link to="/">
-              <img src={logo} alt="logo" height="32" />
+              <img src={logo} alt="logo" style={{height: '32px', width: 'auto'}} />
             </Link>
             <TabMenu
               activeIndex={index}
@@ -406,7 +409,7 @@ export const Header = (props) => {
             >
               <Tab>{t("trade")}</Tab>
               <Tab display={false}>{t("convert")}</Tab>
-              <Tab display={hasBridge && network !== 1002}>{t("bridge")}</Tab>
+              <Tab display={false}>{t("bridge")}</Tab>
               <Tab display={!isEVM && network !== 1002}>{t("list_pair")}</Tab>
               <Tab display={false}>
                 {t("docs")}
@@ -419,37 +422,44 @@ export const Header = (props) => {
             </TabMenu>
           </NavWrapper>
           <ActionsWrapper>
-            <Dropdown
-              adClass="menu-dropdown"
-              width={200}
-              item={supportLists}
-              context={t("support")}
-              leftIcon={true}
-              transparent
-            />
-            <Dropdown
-              adClass="menu-dropdown"
-              width={162}
-              item={communityLists}
-              context={t("community")}
-              leftIcon={true}
-              transparent
-            />
-            <VerticalDivider />
+            {/*<Dropdown*/}
+            {/*  adClass="menu-dropdown"*/}
+            {/*  width={200}*/}
+            {/*  item={supportLists}*/}
+            {/*  context={t("support")}*/}
+            {/*  leftIcon={true}*/}
+            {/*  transparent*/}
+            {/*/>*/}
+            {/*<Dropdown*/}
+            {/*  adClass="menu-dropdown"*/}
+            {/*  width={162}*/}
+            {/*  item={communityLists}*/}
+            {/*  context={t("community")}*/}
+            {/*  leftIcon={true}*/}
+            {/*  transparent*/}
+            {/*/>*/}
+            {/*<VerticalDivider />*/}
             <SocialWrapper>
+              {/*<SocialLink*/}
+              {/*  target="_blank"*/}
+              {/*  rel="noreferrer"*/}
+              {/*  href="https://twitter.com/ZigZagExchange"*/}
+              {/*>*/}
+              {/*  <TwitterIcon />*/}
+              {/*</SocialLink>*/}
               <SocialLink
                 target="_blank"
                 rel="noreferrer"
-                href="https://twitter.com/ZigZagExchange"
+                href="https://github.com/zklite-exchange"
               >
-                <TwitterIcon />
+                <span>Github <GithubIcon /></span>
               </SocialLink>
               <SocialLink
                 target="_blank"
                 rel="noreferrer"
-                href="https://t.me/zigzagexchange"
+                href="https://t.me/zklite_exchange"
               >
-                <TelegramIcon />
+                <span>Telegram <TelegramIcon /></span>
               </SocialLink>
             </SocialWrapper>
             <VerticalDivider />
@@ -499,7 +509,7 @@ export const Header = (props) => {
           <TabMenu row activeIndex={index} onItemClick={handleClick}>
             <Tab>{t("trade")}</Tab>
             <Tab display={false}>{t("convert")}</Tab>
-            <Tab display={hasBridge && network !== 1002}>{t("bridge")}</Tab>
+            <Tab display={false}>{t("bridge")}</Tab>
             <Tab display={!isEVM && network !== 1002}>{t("list_pair")}</Tab>
             <Tab display={false}>
               {t("docs")}
@@ -510,7 +520,7 @@ export const Header = (props) => {
               <ExternalLinkIcon size={12} />
             </Tab>
           </TabMenu>
-          <HorizontalDivider />
+          {/*<HorizontalDivider />*/}
           {/* <ActionSideMenuWrapper>
             <span>Language: </span>
             <StyledDropdown
@@ -525,37 +535,44 @@ export const Header = (props) => {
           {/*  <span>Theme: </span>*/}
           {/*  <ToggleTheme isDark={isDark} toggleTheme={toggleTheme} />*/}
           {/*</ActionSideMenuWrapper>*/}
-          <HorizontalDivider />
-          <Dropdown
-            adClass="menu-dropdown"
-            width={200}
-            item={supportLists}
-            context={t("support")}
-            leftIcon={true}
-            transparent
-          />
-          <Dropdown
-            adClass="menu-dropdown"
-            width={162}
-            item={communityLists}
-            context={t("community")}
-            leftIcon={true}
-            transparent
-          />
+          {/*<HorizontalDivider />*/}
+          {/*<Dropdown*/}
+          {/*  adClass="menu-dropdown"*/}
+          {/*  width={200}*/}
+          {/*  item={supportLists}*/}
+          {/*  context={t("support")}*/}
+          {/*  leftIcon={true}*/}
+          {/*  transparent*/}
+          {/*/>*/}
+          {/*<Dropdown*/}
+          {/*  adClass="menu-dropdown"*/}
+          {/*  width={162}*/}
+          {/*  item={communityLists}*/}
+          {/*  context={t("community")}*/}
+          {/*  leftIcon={true}*/}
+          {/*  transparent*/}
+          {/*/>*/}
           <SocialWrapper style={{ justifySelf: "center", marginTop: "150px" }}>
+            {/*<SocialLink*/}
+            {/*  target="_blank"*/}
+            {/*  rel="noreferrer"*/}
+            {/*  href="https://twitter.com/ZigZagExchange"*/}
+            {/*>*/}
+            {/*  <TwitterIcon />*/}
+            {/*</SocialLink>*/}
             <SocialLink
               target="_blank"
               rel="noreferrer"
-              href="https://twitter.com/ZigZagExchange"
+              href="https://github.com/zklite-exchange"
             >
-              <TwitterIcon />
+              <span>Github <GithubIcon /></span>
             </SocialLink>
             <SocialLink
               target="_blank"
               rel="noreferrer"
-              href="https://t.me/zigzagexchange"
+              href="https://t.me/zklite_exchange"
             >
-              <TelegramIcon />
+              <span>Telegram <TelegramIcon /></span>
             </SocialLink>
           </SocialWrapper>
         </SideMenuWrapper>
