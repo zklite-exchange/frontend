@@ -10,6 +10,7 @@ import { useTranslation } from "react-i18next";
 import { networkSelector } from "lib/store/features/api/apiSlice";
 import api from "lib/api";
 import logo from "assets/images/logo.png";
+import logo_wide from "assets/images/logo_wide.png";
 import zksyncLogo from "assets/images/networks/zksync-network.svg";
 import arbitrumLogo from "assets/images/networks/arbitrum-network.svg";
 import { TabMenu, Tab } from "components/molecules/TabMenu";
@@ -380,7 +381,7 @@ export const Header = (props) => {
         <>
           <LogoWrapper>
             <Link to="/">
-              <img src={logo} alt="logo" style={{height: '32px', width: 'auto'}} />
+              <img src={logo_wide} alt="logo" style={{height: '32px', width: 'auto', maxWidth: 'none'}} />
             </Link>
           </LogoWrapper>
           <ButtonWrapper>
@@ -400,7 +401,7 @@ export const Header = (props) => {
         <>
           <NavWrapper>
             <Link to="/">
-              <img src={logo} alt="logo" style={{height: '32px', width: 'auto'}} />
+              <img src={logo_wide} alt="logo" style={{height: '32px', width: 'auto', maxWidth: 'none'}} />
             </Link>
             <TabMenu
               activeIndex={index}
