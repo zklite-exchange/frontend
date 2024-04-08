@@ -462,7 +462,7 @@ export const Header = (props) => {
                 context={language}
                 clickFunction={changeLanguage}
               /> */}
-              <ToggleTheme isDark={isDark} toggleTheme={toggleTheme} />
+              {/*<ToggleTheme isDark={isDark} toggleTheme={toggleTheme} />*/}
             </LanguageWrapper>
             <VerticalDivider />
 
@@ -521,10 +521,10 @@ export const Header = (props) => {
               clickFunction={changeLanguage}
             />
           </ActionSideMenuWrapper> */}
-          <ActionSideMenuWrapper>
-            <span>Theme: </span>
-            <ToggleTheme isDark={isDark} toggleTheme={toggleTheme} />
-          </ActionSideMenuWrapper>
+          {/*<ActionSideMenuWrapper>*/}
+          {/*  <span>Theme: </span>*/}
+          {/*  <ToggleTheme isDark={isDark} toggleTheme={toggleTheme} />*/}
+          {/*</ActionSideMenuWrapper>*/}
           <HorizontalDivider />
           <Dropdown
             adClass="menu-dropdown"
