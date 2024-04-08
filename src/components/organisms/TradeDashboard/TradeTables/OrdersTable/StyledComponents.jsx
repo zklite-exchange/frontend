@@ -82,7 +82,8 @@ export const FooterContainer = styled.div`
 `;
 
 export const LaptopWrapper = styled.div`
-  height: 100%;
+  height: calc(100% - 53px);
+
 
   > div {
     height: 100%;
@@ -131,7 +132,7 @@ export const LaptopWrapper = styled.div`
   table {
     display: block;
     width: 100%;
-    height: calc(100% - 53px);
+    height: 100%;
   }
 
   table thead th {
@@ -150,7 +151,8 @@ export const LaptopWrapper = styled.div`
 
 export const MobileWrapper = styled.div`
   display: block;
-  height: 100%;
+  height: calc(100% - 53px);
+
   overflow: auto;
   overflow-x: hidden;
 
@@ -162,8 +164,7 @@ export const MobileWrapper = styled.div`
   table {
     display: block;
     width: 100%;
-    height: calc(100% - 53px);
-
+    height: 100%;
     thead {
       display: table;
       width: 100%;
@@ -211,9 +212,9 @@ export const MobileWrapper = styled.div`
     height: 23px;
   }
 
-  @media screen and (max-width: 992px) {
-    max-height: calc(100% - 90px);
-  }
+  //@media screen and (max-width: 992px) {
+  //  max-height: calc(100% );
+  //}
 `;
 
 export const SortIconWrapper = styled.div`
