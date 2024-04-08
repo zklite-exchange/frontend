@@ -11,7 +11,7 @@ const GetStartedPopup = ({ onCloseBtn }) => {
     <div className="max-w-3xl p-5 mt-10 border rounded-lg shadow-lg bg-background-700 border-foreground-400">
       <div className="flex items-center justify-between pb-3 border-b border-foreground-400">
         <p className="text-xl font-semibold font-work">
-          Get Started with ZigZag
+          Get Started with ZkLite Exchange
         </p>
         <CloseIcon
           className="cursor-pointer hover:opacity-75"

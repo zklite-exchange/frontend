@@ -139,7 +139,7 @@ export default function ListPairPage() {
   };
 
   useEffect(() => {
-    document.title = "ZigZag List Pair";
+    document.title = "ZkLite List Pair";
   }, []);
 
   useEffect(() => {

@@ -51,7 +51,7 @@ export default function TradeFooter() {
         color="foregroundLowEmphasis"
         textAlign={isMobile ? "center" : "left"}
       >
-        ZigZag Exchange © 2022
+        ZkLite Exchange © 2024
       </Text>
       <StyledLinkBox>
         <SocialWrapper>

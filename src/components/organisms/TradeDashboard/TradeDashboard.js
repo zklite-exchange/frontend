@@ -99,7 +99,7 @@ export function TradeDashboard() {
     if (!currentPairLastPrice) return;
     document.title = `${addComma(formatPrice(currentPairLastPrice))} | ${
       currentMarket ?? "--"
-    } | ZigZag Exchange`;
+    } | ZkLite Exchange`;
   }, [currentPairLastPrice]);
 
   useEffect(() => {
