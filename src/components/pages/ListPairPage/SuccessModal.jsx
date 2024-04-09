@@ -27,7 +27,7 @@ const SuccessModal = ({ txid, show, onClose }) => {
   const [quoteAsset, setQuoteAsset] = useState();
   const [alias, setAlias] = useState();
 
-  const viewMarketURL = `https://zigzag-exchange.herokuapp.com/api/v1/marketinfos?market=${txid}`;
+  const viewMarketURL = `${process.env.REACT_APP_ZIGZAG_API}/api/v1/marketinfos?market=${txid}`;
 
   useEffect(() => {
     if (show) {
@@ -88,7 +88,7 @@ const SuccessModal = ({ txid, show, onClose }) => {
         fontSize={14}
       >
         <ExternalLink href={
-          `https://zigzag-exchange.herokuapp.com/api/v1/marketinfos?chain_id=${chainId}&market=${baseAsset}-${quoteAsset}`
+          `${process.env.REACT_APP_ZIGZAG_API}/api/v1/marketinfos?chain_id=${chainId}&market=${baseAsset}-${quoteAsset}`
         }>
           View your market
         </ExternalLink>
