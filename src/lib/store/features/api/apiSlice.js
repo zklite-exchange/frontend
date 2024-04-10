@@ -85,7 +85,7 @@ export const apiSlice = createSlice({
             {i18next.t("an_unknown_error_has_occurred_while_processing")} '{op}'
             ({errorMessage}). Please{" "}
             <a
-              href={"https://zigzag.exchange/#contact"}
+              href={"mailto:contact@zklite.io"}
               style={{
                 color: "white",
                 textDecoration: "underline",
@@ -96,9 +96,9 @@ export const apiSlice = createSlice({
             >
               contact us
             </a>{" "}
-            or join the{" "}
+            or join our{" "}
             <a
-              href={"https://discord.gg/zigzag"}
+              href={"https://t.me/zklite_exchange"}
               style={{
                 color: "white",
                 textDecoration: "underline",
@@ -107,7 +107,7 @@ export const apiSlice = createSlice({
               target="_blank"
               rel="noreferrer"
             >
-              Discord
+              Telegram channel
             </a>{" "}
             to report and solve this bug.
           </>
