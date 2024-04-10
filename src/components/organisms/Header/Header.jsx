@@ -411,7 +411,7 @@ export const Header = (props) => {
               <Tab>{t("trade")}</Tab>
               <Tab display={false}>{t("convert")}</Tab>
               <Tab display={false}>{t("bridge")}</Tab>
-              <Tab display={!isEVM && network !== 1002}>{t("list_pair")}</Tab>
+              <Tab display={false}>{t("list_pair")}</Tab>
               <Tab display={false}>
                 {t("docs")}
                 <ExternalLinkIcon size={12} />
@@ -511,7 +511,7 @@ export const Header = (props) => {
             <Tab>{t("trade")}</Tab>
             <Tab display={false}>{t("convert")}</Tab>
             <Tab display={false}>{t("bridge")}</Tab>
-            <Tab display={!isEVM && network !== 1002}>{t("list_pair")}</Tab>
+            <Tab display={false}>{t("list_pair")}</Tab>
             <Tab display={false}>
               {t("docs")}
               <ExternalLinkIcon size={12} />

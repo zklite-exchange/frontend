@@ -7,8 +7,8 @@ import {
   setUISettings,
 } from "lib/store/features/api/apiSlice";
 import TradePage from "components/pages/TradePage/TradePage";
-import BridgePage from "components/pages/BridgePage/BridgePage";
-import ListPairPage from "components/pages/ListPairPage/ListPairPage";
+// import BridgePage from "components/pages/BridgePage/BridgePage";
+// import ListPairPage from "components/pages/ListPairPage/ListPairPage";
 import NotFoundPage from "components/pages/NotFoundPage/NotFoundPage";
 
 const AppRoutes = () => {
@@ -32,8 +32,8 @@ const AppRoutes = () => {
       <Router>
         <Switch>
           <Route exact path="/" component={TradePage} />
-          <Route exact path="/bridge/:tab?" component={BridgePage} />
-          <Route exact path="/list-pair" component={ListPairPage} />
+          {/*<Route exact path="/bridge/:tab?" component={BridgePage} />*/}
+          {/*<Route exact path="/list-pair" component={ListPairPage} />*/}
           <Route path="*" component={NotFoundPage} />
         </Switch>
       </Router>
