@@ -100,11 +100,19 @@ api.on("signOut", (accountState) => {
   store.dispatch(signOut());
 });
 
+let firstLoad = true;
 api.on("providerChange", (network) => {
-  const defaultMarket = api.apiProvider.getDefaultMarket();
-  console.log(`Index set pair to default: ${defaultMarket}`);
+  const marketFromUrl = new URLSearchParams(window.location.search).get("market");
   store.dispatch(setNetwork(network));
-  store.dispatch(setCurrentMarket(defaultMarket));
+  if (firstLoad && marketFromUrl) {
+    console.log(`Index set pair to: ${marketFromUrl}`);
+    store.dispatch(setCurrentMarket(marketFromUrl));
+  } else {
+    const defaultMarket = api.apiProvider.getDefaultMarket();
+    console.log(`Index set pair to default: ${defaultMarket}`);
+    store.dispatch(setCurrentMarket(defaultMarket));
+  }
+  firstLoad = false;
 });
 
 api.on("message", (operation, args) => {
