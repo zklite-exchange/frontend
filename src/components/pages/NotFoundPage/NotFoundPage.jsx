@@ -7,7 +7,7 @@ const NotFoundPage = () => {
     history.push(`/`);
   };
   return (
-    <div className="flex items-center ml-10 mr-10 md:ml-24 lg:ml-36 xl:ml-72 min-h-[100vh]">
+    <div className="flex items-center ml-10 mr-10 md:ml-24 lg:ml-36 xl:ml-72 min-h-screen">
       <div>
         <p className="text-xl font-work">404</p>
         <p className="text-4xl font-semibold mt-9 font-work">
