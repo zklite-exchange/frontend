@@ -213,9 +213,9 @@ const SideMenuWrapper = styled.div`
   height: 100vh;
   background: ${({ theme }) => theme.colors.backgroundLowEmphasis};
   z-index: 9999;
-  display: grid;
-  grid-auto-flow: row;
-  justify-content: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
   align-items: center;
   border: 1px solid ${({ theme }) => theme.colors.foreground400};
   backdrop-filter: blur(8px);
@@ -496,33 +496,35 @@ export const Header = (props) => {
       )}
       {show && isMobile ? (
         <SideMenuWrapper>
-          <Dropdown
-            adClass="network-dropdown"
-            isMobile={true}
-            style={{ justifySelf: "center" }}
-            width={242}
-            item={networkItems}
-            context={networkName}
-            clickFunction={changeNetwork}
-            leftIcon={true}
-          />
-          <LanguageDropdown />
-          <TabMenu row activeIndex={index} onItemClick={handleClick}>
-            <Tab>{t("trade")}</Tab>
-            <Tab display={false}>{t("convert")}</Tab>
-            <Tab display={false}>{t("bridge")}</Tab>
-            <Tab display={false}>{t("list_pair")}</Tab>
-            <Tab display={false}>
-              {t("docs")}
-              <ExternalLinkIcon size={12} />
-            </Tab>
-            <Tab display={isEVM}>
-              {t("wrap")}
-              <ExternalLinkIcon size={12} />
-            </Tab>
-          </TabMenu>
-          {/*<HorizontalDivider />*/}
-          {/* <ActionSideMenuWrapper>
+          <div style={{flexGrow: 1}}>
+            <div style={{display: "grid", gap: '20px', marginTop: '10vh'}}>
+              <Dropdown
+                adClass="network-dropdown"
+                isMobile={true}
+                style={{ justifySelf: "center"}}
+                width={242}
+                item={networkItems}
+                context={networkName}
+                clickFunction={changeNetwork}
+                leftIcon={true}
+              />
+              <LanguageDropdown />
+              <TabMenu  activeIndex={index} onItemClick={handleClick}>
+                <Tab>{t("trade")}</Tab>
+                <Tab display={false}>{t("convert")}</Tab>
+                <Tab display={false}>{t("bridge")}</Tab>
+                <Tab display={false}>{t("list_pair")}</Tab>
+                <Tab display={false}>
+                  {t("docs")}
+                  <ExternalLinkIcon size={12} />
+                </Tab>
+                <Tab display={isEVM}>
+                  {t("wrap")}
+                  <ExternalLinkIcon size={12} />
+                </Tab>
+              </TabMenu>
+              {/*<HorizontalDivider />*/}
+              {/* <ActionSideMenuWrapper>
             <span>Language: </span>
             <StyledDropdown
               adClass="lang-dropdown"
@@ -532,28 +534,30 @@ export const Header = (props) => {
               clickFunction={changeLanguage}
             />
           </ActionSideMenuWrapper> */}
-          {/*<ActionSideMenuWrapper>*/}
-          {/*  <span>Theme: </span>*/}
-          {/*  <ToggleTheme isDark={isDark} toggleTheme={toggleTheme} />*/}
-          {/*</ActionSideMenuWrapper>*/}
-          {/*<HorizontalDivider />*/}
-          {/*<Dropdown*/}
-          {/*  adClass="menu-dropdown"*/}
-          {/*  width={200}*/}
-          {/*  item={supportLists}*/}
-          {/*  context={t("support")}*/}
-          {/*  leftIcon={true}*/}
-          {/*  transparent*/}
-          {/*/>*/}
-          {/*<Dropdown*/}
-          {/*  adClass="menu-dropdown"*/}
-          {/*  width={162}*/}
-          {/*  item={communityLists}*/}
-          {/*  context={t("community")}*/}
-          {/*  leftIcon={true}*/}
-          {/*  transparent*/}
-          {/*/>*/}
-          <SocialWrapper style={{ justifySelf: "center", marginTop: "150px" }}>
+              {/*<ActionSideMenuWrapper>*/}
+              {/*  <span>Theme: </span>*/}
+              {/*  <ToggleTheme isDark={isDark} toggleTheme={toggleTheme} />*/}
+              {/*</ActionSideMenuWrapper>*/}
+              {/*<HorizontalDivider />*/}
+              {/*<Dropdown*/}
+              {/*  adClass="menu-dropdown"*/}
+              {/*  width={200}*/}
+              {/*  item={supportLists}*/}
+              {/*  context={t("support")}*/}
+              {/*  leftIcon={true}*/}
+              {/*  transparent*/}
+              {/*/>*/}
+              {/*<Dropdown*/}
+              {/*  adClass="menu-dropdown"*/}
+              {/*  width={162}*/}
+              {/*  item={communityLists}*/}
+              {/*  context={t("community")}*/}
+              {/*  leftIcon={true}*/}
+              {/*  transparent*/}
+              {/*/>*/}
+            </div>
+          </div>
+          <SocialWrapper style={{ justifySelf: "center", marginBottom: "50px" }}>
             {/*<SocialLink*/}
             {/*  target="_blank"*/}
             {/*  rel="noreferrer"*/}
