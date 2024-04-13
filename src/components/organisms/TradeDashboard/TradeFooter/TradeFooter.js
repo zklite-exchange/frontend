@@ -51,7 +51,7 @@ export default function TradeFooter() {
         color="foregroundLowEmphasis"
         textAlign={isMobile ? "center" : "left"}
       >
-        ZkLite Exchange © 2024
+        zkLite Exchange © 2024
       </Text>
       <StyledLinkBox>
         <SocialWrapper>
