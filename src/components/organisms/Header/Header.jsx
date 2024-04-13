@@ -174,7 +174,7 @@ const SocialWrapper = styled.div`
   grid-auto-flow: column;
   align-items: center;
   justify-items: center;
-  width: 200px;
+  width: 280px;
 `;
 
 const LanguageWrapper = styled.div`
@@ -462,6 +462,13 @@ export const Header = (props) => {
               >
                 <span>Telegram <TelegramIcon /></span>
               </SocialLink>
+              <SocialLink
+                target="_blank"
+                rel="noreferrer"
+                href="https://twitter.com/zklite_exchange"
+              >
+                <span>Twitter <TwitterIcon /></span>
+              </SocialLink>
             </SocialWrapper>
             <VerticalDivider />
             <LanguageDropdown />
@@ -558,13 +565,6 @@ export const Header = (props) => {
             </div>
           </div>
           <SocialWrapper style={{ justifySelf: "center", marginBottom: "50px" }}>
-            {/*<SocialLink*/}
-            {/*  target="_blank"*/}
-            {/*  rel="noreferrer"*/}
-            {/*  href="https://twitter.com/ZigZagExchange"*/}
-            {/*>*/}
-            {/*  <TwitterIcon />*/}
-            {/*</SocialLink>*/}
             <SocialLink
               target="_blank"
               rel="noreferrer"
@@ -578,6 +578,13 @@ export const Header = (props) => {
               href="https://t.me/zklite_exchange"
             >
               <span>Telegram <TelegramIcon /></span>
+            </SocialLink>
+            <SocialLink
+              target="_blank"
+              rel="noreferrer"
+              href="https://twitter.com/zklite_exchange"
+            >
+              <span>Twitter <TwitterIcon /></span>
             </SocialLink>
           </SocialWrapper>
         </SideMenuWrapper>
