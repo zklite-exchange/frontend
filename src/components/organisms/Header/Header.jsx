@@ -347,9 +347,9 @@ export const Header = (props) => {
         break;
 
       case 2:
-        setIndex(newIndex);
-        localStorage.setItem("tab_index", newIndex);
-        history.push("bridge");
+        // setIndex(newIndex);
+        // localStorage.setItem("tab_index", newIndex);
+        // history.push("bridge");
         break;
       case 3:
         setIndex(newIndex);
@@ -410,7 +410,9 @@ export const Header = (props) => {
             >
               <Tab>{t("trade")}</Tab>
               <Tab display={false}>{t("convert")}</Tab>
-              <Tab display={false}>{t("bridge")}</Tab>
+              <a href="https://lite.zksync.io/" target="_blank" rel="noreferrer">
+                <Tab display={true}>{t("bridge")}</Tab>
+              </a>
               <Tab display={false}>{t("list_pair")}</Tab>
               <Tab display={false}>
                 {t("docs")}
@@ -519,7 +521,9 @@ export const Header = (props) => {
               <TabMenu  activeIndex={index} onItemClick={handleClick}>
                 <Tab>{t("trade")}</Tab>
                 <Tab display={false}>{t("convert")}</Tab>
-                <Tab display={false}>{t("bridge")}</Tab>
+                <a href="https://lite.zksync.io/" target="_blank" rel="noreferrer">
+                  <Tab display={true}>{t("bridge")}</Tab>
+                </a>
                 <Tab display={false}>{t("list_pair")}</Tab>
                 <Tab display={false}>
                   {t("docs")}
