@@ -65,6 +65,9 @@ const Table = styled.table`
     width: 20%;
     text-align: start;
     padding-left: 0px;
+    @media screen and (max-width: 500px) {
+        width: auto;
+    }
   }
 
   th:nth-child(2),
