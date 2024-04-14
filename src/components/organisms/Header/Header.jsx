@@ -29,6 +29,7 @@ import {
   MdOutlineContactMail,
 } from "react-icons/md";
 import { FaGithub } from "react-icons/fa";
+import { useWindowDimensions } from "lib/utils";
 
 const networkLists = [
   {
@@ -205,6 +206,7 @@ const SideMenuWrapper = styled.div`
   top: 0;
   left: 0;
   height: 100vh;
+  max-height: ${props => `${props.windowHeight}px`};
   background: ${({ theme }) => theme.colors.backgroundLowEmphasis};
   z-index: 9999;
   display: flex;
@@ -367,6 +369,7 @@ export const Header = (props) => {
   };
 
   const isMobile = useMediaQuery({ maxWidth: 1224 });
+  const {height: windowHeight} = useWindowDimensions()
 
   return (
     <>
@@ -498,7 +501,7 @@ export const Header = (props) => {
         </>
       )}
       {show && isMobile ? (
-        <SideMenuWrapper>
+        <SideMenuWrapper windowHeight={windowHeight}>
           <div style={{flexGrow: 1}}>
             <div style={{display: "grid", gap: '20px', marginTop: '10vh'}}>
               <Dropdown

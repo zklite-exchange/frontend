@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { BigNumber } from "ethers";
 import isString from "lodash/isString";
 import get from "lodash/get";
@@ -233,4 +233,27 @@ export function HideMenuOnOutsideClicked(ref, hideMenu) {
 
 export function shortenAddress(address, chars) {
   return `${address.slice(0, chars)}•••${address.slice(-chars)}`;
+}
+
+function getWindowDimensions() {
+  const { innerWidth: width, innerHeight: height } = window;
+  return {
+    width,
+    height
+  };
+}
+
+export function useWindowDimensions() {
+  const [windowDimensions, setWindowDimensions] = useState(getWindowDimensions());
+
+  useEffect(() => {
+    function handleResize() {
+      setWindowDimensions(getWindowDimensions());
+    }
+
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
+  return windowDimensions;
 }
