@@ -1,5 +1,5 @@
 import { Fragment, useState } from "react";
-import { Listbox, Transition } from "@headlessui/react";
+import { Listbox } from "@headlessui/react";
 import { ChevronDownIcon } from "@heroicons/react/solid";
 import useTheme from "components/hooks/useTheme";
 import classNames from "classnames";

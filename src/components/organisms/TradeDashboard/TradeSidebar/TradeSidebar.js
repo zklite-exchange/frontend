@@ -2,15 +2,11 @@ import React from "react";
 import { useSelector } from "react-redux";
 import styled from "@xstyled/styled-components";
 import SpotBox from "./SpotBox/SpotBox";
-import Text from "components/atoms/Text/Text";
-import { DiscordIcon } from "components/atoms/Svg";
 import {
   liquiditySelector,
   balancesSelector,
 } from "lib/store/features/api/apiSlice";
-import { Button } from "components/molecules/Button";
 import useTheme from "components/hooks/useTheme";
-import { useTranslation } from "react-i18next";
 
 const StyledTradeSidebar = styled.aside`
   // display: grid;
@@ -66,12 +62,6 @@ export default function TradeSidebar(props) {
   const balances = useSelector(balancesSelector);
   const liquidity = useSelector(liquiditySelector);
   const { isDark } = useTheme();
-  const isMobile = window.innerWidth < 992;
-  const isSmallScreen = window.innerHeight < 875;
-  const joinDiscord = () => {
-    window.open("https://discord.gg/zigzag", "_blank");
-  };
-  const { t } = useTranslation();
 
   return (
     <StyledTradeSidebar isDark={isDark}>

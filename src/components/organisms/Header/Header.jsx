@@ -9,7 +9,6 @@ import { useMediaQuery } from "react-responsive";
 import { useTranslation } from "react-i18next";
 import { networkSelector } from "lib/store/features/api/apiSlice";
 import api from "lib/api";
-import logo from "assets/images/logo.png";
 import logo_wide from "assets/images/logo_wide.png";
 import zksyncLogo from "assets/images/networks/zksync-network.svg";
 import arbitrumLogo from "assets/images/networks/arbitrum-network.svg";
@@ -17,24 +16,19 @@ import { TabMenu, Tab } from "components/molecules/TabMenu";
 import { Dropdown, AccountDropdown } from "components/molecules/Dropdown";
 import { ConnectWalletButton } from "components/molecules/Button";
 import {
-  DiscordIcon,
   ExternalLinkIcon,
   TelegramIcon,
   TwitterIcon,
   MenuIcon, GithubIcon
 } from "components/atoms/Svg";
-import ToggleTheme from "components/molecules/Toggle/ToggleTheme";
 import LanguageDropdown from "./LangaugeDropdown";
 import useTheme from "components/hooks/useTheme";
 import {
   MdOutlineArticle,
   MdOutlineQuiz,
-  MdSignalCellularAlt,
-  MdAccountBalance,
-  MdCreate,
   MdOutlineContactMail,
 } from "react-icons/md";
-import { FaDiscord, FaGithub } from "react-icons/fa";
+import { FaGithub } from "react-icons/fa";
 
 const networkLists = [
   {
