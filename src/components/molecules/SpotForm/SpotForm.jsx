@@ -119,7 +119,7 @@ class SpotForm extends React.Component {
     e.preventDefault();
     const newState = { ...this.state };
     newState.price = formatPrice(this.state.price * 1.001);
-    if (this.props.quoteChanged) {
+    if (this.state.quoteChanged) {
       // for buy quoteAmount should be fixed
       newState.baseAmount = newState.quoteAmount / newState.price;
     } else {
@@ -136,7 +136,7 @@ class SpotForm extends React.Component {
     e.preventDefault();
     const newState = { ...this.state };
     newState.price = formatPrice(this.state.price * 0.999);
-    if (this.props.quoteChanged) {
+    if (this.state.quoteChanged) {
       // for buy quoteAmount should be fixed
       newState.baseAmount = newState.quoteAmount / newState.price;
     } else {
