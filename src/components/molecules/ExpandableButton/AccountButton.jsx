@@ -28,13 +28,13 @@ const AccountButton = ({ ...props }) => {
       variant="secondary"
       onClick={onClick}
       startIcon={
-        <AvatarImg notext={notext} src={profile.image} alt={profile.name} />
+        <AvatarImg notext={notext} src={profile?.image} alt={profile?.name} />
       }
       endIcon={expanded ? <CaretUpIcon /> : <CaretDownIcon />}
     >
       {notext ? null : (
         <Text font="primaryExtraSmallSemiBold" color="foregroundHighEmphasis">
-          {settings.hideAddress ? "*****...*****" : profile.name}
+          {settings.hideAddress || !profile?.name ? "*****...*****" : profile?.name}
         </Text>
       )}
     </IconButton>
