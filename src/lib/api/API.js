@@ -4,15 +4,12 @@ import Emitter from "tiny-emitter";
 import { ethers, constants as ethersConstants } from "ethers";
 import WalletConnectProvider from "@walletconnect/web3-provider";
 import CoinbaseWalletSDK from "@coinbase/wallet-sdk";
-import { getENSName, reverseUnstoppabledomainsAddress } from "lib/ens";
 import { formatAmount } from "lib/utils";
 import erc20ContractABI from "lib/contracts/ERC20.json";
-import { MAX_ALLOWANCE } from "./constants";
 import { toast } from "react-toastify";
 
 import axios from "axios";
 import { isMobile } from "react-device-detect";
-import get from "lodash/get";
 
 import i18next from "../i18next";
 
@@ -153,52 +150,52 @@ class API extends Emitter {
   };
 
   getProfile = async (address) => {
-    const getProfileFromIPFS = async (address) => {
-      try {
-        const controller = new AbortController();
-        setTimeout(() => controller.abort(), 1500);
-
-        const { data } = await axios.get(
-          `https://ipfs.3box.io/profile?address=${address}`,
-          {
-            signal: controller.signal,
-          }
-        );
-        const profile = {
-          coverPhoto: get(data, "coverPhoto.0.contentUrl./"),
-          image: get(data, "image.0.contentUrl./"),
-          description: data.description,
-          emoji: data.emoji,
-          website: data.website,
-          location: data.location,
-          twitter_proof: data.twitter_proof,
-        };
-
-        if (data.name) {
-          profile.name = data.name;
-        }
-
-        if (profile.image) {
-          profile.image = `https://gateway.ipfs.io/ipfs/${profile.image}`;
-        }
-
-        return profile;
-      } catch (err) {
-        console.warn(`Failed to get profile from IPFS: ${err}`);
-      }
-      return {};
-    };
-
-    const fetchAddressName = async (address) => {
-      const [ensName, unstoppabledomainsName] = await Promise.all([
-        getENSName(address),
-        reverseUnstoppabledomainsAddress(address),
-      ]);
-      if (ensName) return { name: ensName };
-      if (unstoppabledomainsName) return { name: unstoppabledomainsName };
-
-      return {};
-    };
+    // const getProfileFromIPFS = async (address) => {
+    //   try {
+    //     const controller = new AbortController();
+    //     setTimeout(() => controller.abort(), 1500);
+    //
+    //     const { data } = await axios.get(
+    //       `https://ipfs.3box.io/profile?address=${address}`,
+    //       {
+    //         signal: controller.signal,
+    //       }
+    //     );
+    //     const profile = {
+    //       coverPhoto: get(data, "coverPhoto.0.contentUrl./"),
+    //       image: get(data, "image.0.contentUrl./"),
+    //       description: data.description,
+    //       emoji: data.emoji,
+    //       website: data.website,
+    //       location: data.location,
+    //       twitter_proof: data.twitter_proof,
+    //     };
+    //
+    //     if (data.name) {
+    //       profile.name = data.name;
+    //     }
+    //
+    //     if (profile.image) {
+    //       profile.image = `https://gateway.ipfs.io/ipfs/${profile.image}`;
+    //     }
+    //
+    //     return profile;
+    //   } catch (err) {
+    //     console.warn(`Failed to get profile from IPFS: ${err}`);
+    //   }
+    //   return {};
+    // };
+    //
+    // const fetchAddressName = async (address) => {
+    //   const [ensName, unstoppabledomainsName] = await Promise.all([
+    //     getENSName(address),
+    //     reverseUnstoppabledomainsAddress(address),
+    //   ]);
+    //   if (ensName) return { name: ensName };
+    //   if (unstoppabledomainsName) return { name: unstoppabledomainsName };
+    //
+    //   return {};
+    // };
 
     if (!this._profiles[address]) {
       const profile = (this._profiles[address] = {
@@ -217,13 +214,13 @@ class API extends Emitter {
       }
 
       profile.name = `${address.substr(0, 6)}…${address.substr(-6)}`;
-      Object.assign(
-        profile,
-        ...(await Promise.all([
-          fetchAddressName(address),
-          // getProfileFromIPFS(address),
-        ]))
-      );
+      // Object.assign(
+      //   profile,
+      //   ...(await Promise.all([
+      //     fetchAddressName(address),
+      //     // getProfileFromIPFS(address),
+      //   ]))
+      // );
     }
 
     return this._profiles[address];
