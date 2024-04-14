@@ -1309,7 +1309,7 @@ const InputBox = styled.div`
 
 const RangeWrapper = styled.div`
   position: relative;
-  width: 98%;
+  //width: 98%;
   padding-left: 10px;
   display: flex;
   align-items: center;
