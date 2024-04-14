@@ -1,7 +1,7 @@
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { useHistory, useLocation } from "react-router-dom";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import styled from "styled-components";
 import CheckIcon from "@mui/icons-material/Check";
 import { userSelector } from "lib/store/features/auth/authSlice";
@@ -29,7 +29,7 @@ import {
   MdOutlineContactMail,
 } from "react-icons/md";
 import { FaGithub } from "react-icons/fa";
-import { useWindowDimensions } from "lib/utils";
+import { HideMenuOnOutsideClicked, useWindowDimensions } from "lib/utils";
 
 const networkLists = [
   {
@@ -370,6 +370,8 @@ export const Header = (props) => {
 
   const isMobile = useMediaQuery({ maxWidth: 1224 });
   const {height: windowHeight} = useWindowDimensions()
+  const navPanelRef = useRef(null)
+  HideMenuOnOutsideClicked(navPanelRef, setShow)
 
   return (
     <>
@@ -501,7 +503,7 @@ export const Header = (props) => {
         </>
       )}
       {show && isMobile ? (
-        <SideMenuWrapper windowHeight={windowHeight}>
+        <SideMenuWrapper windowHeight={windowHeight} ref={navPanelRef}>
           <div style={{flexGrow: 1}}>
             <div style={{display: "grid", gap: '20px', marginTop: '10vh'}}>
               <Dropdown
