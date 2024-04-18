@@ -67,13 +67,11 @@ const TradePriceHeadSecond = (props) => {
       )}
       <Text font="primaryMediumSmallSemiBold" color="foregroundMediumEmphasis">
         ${" "}
-        {props.marketInfo
-          ? props.marketInfo.baseAsset
+        {props.marketInfo?.baseAsset?.usdPrice > 0 && props.marketInfo?.quoteAsset?.usdPrice > 0
             ? addComma(
-                parseFloat(formatPrice(props.marketInfo.baseAsset.usdPrice))
+                parseFloat(formatPrice(props.marketInfo.baseAsset.usdPrice / props.marketInfo.quoteAsset.usdPrice))
               )
-            : "--"
-          : "--"}
+            : "--"}
       </Text>
     </Wrapper>
   );
