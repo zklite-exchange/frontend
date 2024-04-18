@@ -32,6 +32,7 @@ export const TradeChart = (props) => {
       locale="en"
       enable_publishing={false}
       hide_legend={true}
+      allow_symbol_change={false}
     />
   );
 };
