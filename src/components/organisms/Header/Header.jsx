@@ -371,7 +371,8 @@ export const Header = (props) => {
   const isMobile = useMediaQuery({ maxWidth: 1224 });
   const {height: windowHeight} = useWindowDimensions()
   const navPanelRef = useRef(null)
-  HideMenuOnOutsideClicked(navPanelRef, setShow)
+  const navButtonRef = useRef(null)
+  HideMenuOnOutsideClicked(navPanelRef, setShow, navButtonRef)
 
   return (
     <>
@@ -391,7 +392,7 @@ export const Header = (props) => {
             ) : (
               <ConnectWalletButton />
             )}
-            <MenuButtonWrapper>
+            <MenuButtonWrapper ref={navButtonRef} >
               <MenuIcon onClick={() => setShow(!show)} />
             </MenuButtonWrapper>
           </ButtonWrapper>

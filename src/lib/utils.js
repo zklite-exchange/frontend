@@ -211,13 +211,16 @@ export function formatDateTime(date) {
   return datestr + " " + timestr;
 }
 
-export function HideMenuOnOutsideClicked(ref, hideMenu) {
+export function HideMenuOnOutsideClicked(ref, hideMenu, ignoreRef) {
   useEffect(() => {
     /**
      * Alert if clicked on outside of element
      */
     function handleClickOutside(event) {
       if (ref.current && !ref.current.contains(event.target)) {
+        if (ignoreRef?.current?.contains(event.target)) {
+          return
+        }
         hideMenu(false);
       }
     }
