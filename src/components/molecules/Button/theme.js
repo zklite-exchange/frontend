@@ -46,6 +46,7 @@ export const styleVariants = (theme) => {
       // 	borderImageSource: theme.colors.strokeGradNorm,
       // 	boxShadow: theme.colors.gradientBtnFocusBoxShadow,
       // },
+      textShadow: "0 0 8px rgba(0, 0, 0, 0.31)",
       ":disabled": {
         background: `${theme.colors.backgroundMediumEmphasis}`,
         opacity: "0.5",
