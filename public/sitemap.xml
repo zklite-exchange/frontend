@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<urlset
+        xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:xhtml="http://www.w3.org/1999/xhtml">
+    <url>
+        <loc>https://trade.zklite.io/?market=ETH-USDC&amp;network=zksync</loc>
+        <priority>1</priority>
+        <lastmod>2024-04-24</lastmod>
+        <changefreq>hourly</changefreq>
+    </url>
+    <url>
+        <loc>https://trade.zklite.io/?market=ETH-USDT&amp;network=zksync</loc>
+        <priority>1</priority>
+        <lastmod>2024-04-24</lastmod>
+        <changefreq>hourly</changefreq>
+    </url>
+    <url>
+        <loc>https://trade.zklite.io/?market=USDC-USDT&amp;network=zksync</loc>
+        <priority>1</priority>
+        <lastmod>2024-04-24</lastmod>
+        <changefreq>hourly</changefreq>
+    </url>
+</urlset>
