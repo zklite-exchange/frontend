@@ -119,7 +119,10 @@ export function TradeDashboard() {
   // Update URL when market or network update
   useEffect(() => {
     const networkText = api.getChainName(network);
-    history.push(`/?market=${currentMarket}&network=${networkText}`);
+    const queryParams = new URLSearchParams(window.location.search)
+    queryParams.set(marketQueryParam, currentMarket)
+    queryParams.set(networkQueryParam, networkText)
+    history.push(`/?${queryParams.toString()}`);
   }, [network, currentMarket]);
 
   useEffect(() => {
