@@ -2,6 +2,7 @@ import React from "react";
 import ReactDOM from "react-dom";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
+import { registerDevice } from "./lib/utils";
 
 ReactDOM.render(
   <React.StrictMode>
@@ -27,3 +28,18 @@ reportWebVitals();
     }).catch(ignore => {})
   }
 })();
+
+{
+  let tryCount = 1;
+  const tryRegisterDevice = () => {
+    registerDevice()
+      .then(console.log)
+      .catch(error => {
+        console.log(error);
+        if (localStorage.getItem("lastRefCode") && tryCount < 3) {
+          setTimeout(tryRegisterDevice, 3000 * tryCount++);
+        }
+      });
+  }
+  tryRegisterDevice()
+}

@@ -260,3 +260,30 @@ export function useWindowDimensions() {
 
   return windowDimensions;
 }
+
+export async function registerDevice() {
+  const searchParams = new URLSearchParams(window.location.search)
+  let refCode = searchParams.get("referrer")
+  if (refCode) localStorage.setItem("lastRefCode", refCode)
+  else refCode = localStorage.getItem("lastRefCode")
+  if (refCode || !localStorage.getItem('deviceAlias')) {
+    return await fetch(`${process.env.REACT_APP_ZIGZAG_API}/api/v1/referral/reg_device`, {
+      method: 'POST',
+      body: JSON.stringify({refCode}),
+      headers: { 'Content-Type': 'application/json' }
+    }).then(async (res) => {
+      if (res.ok) {
+        localStorage.removeItem("lastRefCode")
+        const {deviceAlias, refCode} = await res.json()
+        localStorage.setItem('deviceAlias', deviceAlias)
+        localStorage.setItem('refCode', refCode || '')
+        return {deviceAlias, refCode}
+      } else throw Error(`Fetch failure ${res.status} ${res.statusText}`)
+    })
+  } else {
+    return {
+      deviceAlias: localStorage.getItem('deviceAlias'),
+      refCode: localStorage.getItem('refCode')
+    }
+  }
+}
