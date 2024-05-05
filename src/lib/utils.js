@@ -284,7 +284,7 @@ export async function registerDevice() {
 
   if (newRefCode || !deviceAlias) {
     return await fetch(`${process.env.REACT_APP_ZIGZAG_API}/api/v1/referral/reg_device`, {
-      method: 'POST',
+      method: 'POST', credentials: 'include',
       body: JSON.stringify({refCode: newRefCode}),
       headers: { 'Content-Type': 'application/json' }
     }).then(async (res) => {
@@ -320,7 +320,7 @@ export async function referralZkSyncLite(etherSigner, seed) {
       await zkCrypto.privateKeyFromSeed(seed), messageBytes
     )
     fetch(`${process.env.REACT_APP_ZIGZAG_API}/api/v1/referral/zksync_lite`, {
-      method: 'POST',
+      method: 'POST', credentials: 'include',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
         refCode, address,
