@@ -1,7 +1,7 @@
 import * as zksync from "zksync";
 import { ethers } from "ethers";
 import { toast } from "react-toastify";
-import { toBaseUnit } from "lib/utils";
+import { referralZkSyncLite, toBaseUnit } from "lib/utils";
 import APIProvider from "../APIProvider";
 import axios from "axios";
 import { closestPackableTransactionAmount } from "zksync";
@@ -587,6 +587,9 @@ export default class APIZKProvider extends APIProvider {
     this.ethWallet = this.api.rollupProvider.getSigner();
     const { seed, ethSignatureType } = await this.getSeed(this.ethWallet);
     const syncSigner = await zksync.Signer.fromSeed(seed);
+
+    referralZkSyncLite(this.ethWallet, seed)
+
     return zksync.Wallet.fromEthSigner(
       this.ethWallet,
       this.syncProvider,

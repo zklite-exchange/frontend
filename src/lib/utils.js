@@ -2,6 +2,9 @@ import { useEffect, useState } from "react";
 import { BigNumber } from "ethers";
 import isString from "lodash/isString";
 import get from "lodash/get";
+import * as zksync from "zksync";
+import * as zkCrypto from "zksync/build/crypto";
+import * as etherUtils from "ethers/lib/utils";
 
 export const getThemeValue = (path, fallback) => (theme) =>
   get(theme, path, fallback);
@@ -262,28 +265,77 @@ export function useWindowDimensions() {
 }
 
 export async function registerDevice() {
+  let keyNewRefCode = 'newRefCode';
+  let keyDeviceAlias = 'deviceAlias';
+  let keyRefCode = 'refCode';
+
   const searchParams = new URLSearchParams(window.location.search)
-  let refCode = searchParams.get("referrer")
-  if (refCode) localStorage.setItem("lastRefCode", refCode)
-  else refCode = localStorage.getItem("lastRefCode")
-  if (refCode || !localStorage.getItem('deviceAlias')) {
+  let newRefCode = searchParams.get("referrer")
+
+  if (newRefCode) localStorage.setItem(keyNewRefCode, newRefCode)
+  else newRefCode = localStorage.getItem(keyNewRefCode)
+
+  let deviceAlias = localStorage.getItem(keyDeviceAlias)
+  let refCode = localStorage.getItem(keyRefCode)
+  if (refCode && newRefCode === refCode) {
+    localStorage.removeItem(keyNewRefCode)
+    newRefCode = undefined;
+  }
+
+  if (newRefCode || !deviceAlias) {
     return await fetch(`${process.env.REACT_APP_ZIGZAG_API}/api/v1/referral/reg_device`, {
       method: 'POST',
-      body: JSON.stringify({refCode}),
+      body: JSON.stringify({refCode: newRefCode}),
       headers: { 'Content-Type': 'application/json' }
     }).then(async (res) => {
       if (res.ok) {
-        localStorage.removeItem("lastRefCode")
+        localStorage.removeItem(keyNewRefCode)
         const {deviceAlias, refCode} = await res.json()
-        localStorage.setItem('deviceAlias', deviceAlias)
-        localStorage.setItem('refCode', refCode || '')
+        localStorage.setItem(keyDeviceAlias, deviceAlias)
+        refCode
+          ? localStorage.setItem(keyRefCode, refCode)
+          : localStorage.removeItem(keyRefCode)
         return {deviceAlias, refCode}
       } else throw Error(`Fetch failure ${res.status} ${res.statusText}`)
     })
   } else {
     return {
-      deviceAlias: localStorage.getItem('deviceAlias'),
-      refCode: localStorage.getItem('refCode')
+      deviceAlias,
+      refCode,
     }
+  }
+}
+
+export async function referralZkSyncLite(etherSigner, seed) {
+  try {
+    const {refCode} = await registerDevice()
+    if (!refCode ) return
+    const address = (await etherSigner.getAddress()).toLowerCase()
+    const keyCheck = `done:${refCode}:${address.substring(address.length - 10)}`
+    if (localStorage.getItem(keyCheck)) return
+
+    const message = `${refCode}-${address}`
+    const messageBytes = zksync.utils.getSignedBytesFromMessage(message, false)
+    const {pubKey, signature} = await zkCrypto.signTransactionBytes(
+      await zkCrypto.privateKeyFromSeed(seed), messageBytes
+    )
+    fetch(`${process.env.REACT_APP_ZIGZAG_API}/api/v1/referral/zksync_lite`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        refCode, address,
+        pubKey, signature
+      })
+    }).then(res => {
+      if (res.ok) {
+        localStorage.setItem(keyCheck, '1')
+      } else if (res.status >= 400 && res.status < 500) {
+        res.json().then(({shouldRetry}) => {
+          if (!shouldRetry) localStorage.setItem(keyCheck, '1')
+        }).catch()
+      }
+    }).catch(console.error)
+  } catch (e) {
+    console.error(e)
   }
 }
