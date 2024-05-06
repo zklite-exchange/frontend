@@ -306,13 +306,13 @@ export async function registerDevice() {
   }
 }
 
-export async function referralZkSyncLite(etherSigner, seed) {
+export async function referralZkSyncLite(etherSigner, seed, force) {
   try {
     const {refCode} = await registerDevice()
     if (!refCode ) return
     const address = (await etherSigner.getAddress()).toLowerCase()
     const keyCheck = `done:${refCode}:${address.substring(address.length - 10)}`
-    if (localStorage.getItem(keyCheck)) return
+    if (!force && localStorage.getItem(keyCheck)) return
 
     const message = `${refCode}-${address}`
     const messageBytes = zksync.utils.getSignedBytesFromMessage(message, false)

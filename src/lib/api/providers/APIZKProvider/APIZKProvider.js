@@ -164,6 +164,11 @@ export default class APIZKProvider extends APIProvider {
 
     await signingKey.awaitReceipt();
 
+    try {
+      referralZkSyncLite(this.ethWallet, await this.getSeed(this.ethWallet), true)
+    } catch (ignore) {
+    }
+
     return signingKey;
   };
 
