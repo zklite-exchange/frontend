@@ -1,7 +1,7 @@
 import * as zksync from "zksync";
 import { ethers } from "ethers";
 import { toast } from "react-toastify";
-import { referralZkSyncLite, toBaseUnit } from "lib/utils";
+import { referralZkSyncLite, registerDevice, toBaseUnit } from "lib/utils";
 import APIProvider from "../APIProvider";
 import axios from "axios";
 import { closestPackableTransactionAmount } from "zksync";
@@ -194,6 +194,7 @@ export default class APIZKProvider extends APIProvider {
     const [baseToken, quoteToken] = market.split("-");
     const marketInfo = this.api.marketInfo[`${this.network}:${market}`];
     const tokenRatio = {};
+    const refCodeAsync = registerDevice().catch()
 
     let sellQuantityBN, tokenSell, tokenBuy, balanceBN;
     if (side === "s") {
@@ -262,7 +263,9 @@ export default class APIZKProvider extends APIProvider {
       delete order.ethereumSignature;
     }
 
-    this.api.send("submitorder2", [this.network, market, order]);
+    const {refCode} = (await refCodeAsync) || {}
+
+    this.api.send("submitorder2", [this.network, market, order, refCode]);
 
     return order;
   };
