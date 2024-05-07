@@ -288,23 +288,23 @@ export const Header = (props) => {
       case "/":
         setIndex(0);
         break;
-      case "/convert":
-        setIndex(1);
-        break;
-      case "/bridge":
-        setIndex(2);
-        break;
-      case "/list-pair":
-        setIndex(3);
-        break;
-      case "/dsl":
-        setIndex(4);
-        break;
-      case "/wrap":
-        setIndex(5);
-        break;
+      // case "/convert":
+      //   setIndex(1);
+      //   break;
+      // case "/bridge":
+      //   setIndex(2);
+      //   break;
+      // case "/list-pair":
+      //   setIndex(3);
+      //   break;
+      // case "/dsl":
+      //   setIndex(4);
+      //   break;
+      // case "/wrap":
+      //   setIndex(5);
+      //   break;
       default:
-        setIndex(0);
+        setIndex(-1);
         break;
     }
   }, []);
@@ -336,33 +336,33 @@ export const Header = (props) => {
         setIndex(newIndex);
         history.push("/");
         break;
-      case 1:
-        setIndex(newIndex);
-        localStorage.setItem("tab_index", newIndex);
-        history.push("/convert");
-        break;
-
-      case 2:
-        // setIndex(newIndex);
-        // localStorage.setItem("tab_index", newIndex);
-        // history.push("bridge");
-        break;
-      case 3:
-        setIndex(newIndex);
-        localStorage.setItem("tab_index", newIndex);
-        history.push("/list-pair");
-        break;
-      case 4:
-        setIndex(newIndex);
-        localStorage.setItem("tab_index", newIndex);
-        history.push("/dsl");
-        break;
-      case 5:
-        window.open(
-          "https://app.uniswap.org/#/swap?inputCurrency=ETH&outputCurrency=0x82af49447d8a07e3bd95bd0d56f35241523fbab1&chain=arbitrum",
-          "_blank"
-        );
-        break;
+      // case 1:
+      //   setIndex(newIndex);
+      //   localStorage.setItem("tab_index", newIndex);
+      //   history.push("/convert");
+      //   break;
+      //
+      // case 2:
+      //   // setIndex(newIndex);
+      //   // localStorage.setItem("tab_index", newIndex);
+      //   // history.push("bridge");
+      //   break;
+      // case 3:
+      //   setIndex(newIndex);
+      //   localStorage.setItem("tab_index", newIndex);
+      //   history.push("/list-pair");
+      //   break;
+      // case 4:
+      //   setIndex(newIndex);
+      //   localStorage.setItem("tab_index", newIndex);
+      //   history.push("/dsl");
+      //   break;
+      // case 5:
+      //   window.open(
+      //     "https://app.uniswap.org/#/swap?inputCurrency=ETH&outputCurrency=0x82af49447d8a07e3bd95bd0d56f35241523fbab1&chain=arbitrum",
+      //     "_blank"
+      //   );
+      //   break;
       default:
         break;
     }
