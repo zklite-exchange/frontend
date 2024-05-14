@@ -820,7 +820,7 @@ class API extends Emitter {
 
     const expirationTimeSeconds =
       orderType === "market"
-        ? Date.now() / 1000 + 60 * 2 // two minutes
+        ? Date.now() / 1000 + 60 * 5 // 5 minutes
         : Date.now() / 1000 + 60 * 60 * 24 * 7; // one week
 
     await this.apiProvider.submitOrder(
