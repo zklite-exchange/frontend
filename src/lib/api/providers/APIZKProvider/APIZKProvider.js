@@ -1,7 +1,7 @@
 import * as zksync from "zksync";
 import { ethers } from "ethers";
 import { toast } from "react-toastify";
-import { referralZkSyncLite, registerDevice, toBaseUnit } from "lib/utils";
+import { registerDevice, toBaseUnit } from "lib/utils";
 import APIProvider from "../APIProvider";
 import axios from "axios";
 import { closestPackableTransactionAmount } from "zksync";
@@ -12,6 +12,7 @@ import {
 } from "components/pages/BridgePage/constants";
 
 import i18next from "../../../i18next";
+import * as zkCrypto from "zksync/build/crypto";
 
 export default class APIZKProvider extends APIProvider {
   static SEEDS_STORAGE_KEY = "@ZZ/ZKSYNC_SEEDS";
@@ -163,11 +164,6 @@ export default class APIZKProvider extends APIProvider {
     });
 
     await signingKey.awaitReceipt();
-
-    try {
-      referralZkSyncLite(this.ethWallet, await this.getSeed(this.ethWallet), true)
-    } catch (ignore) {
-    }
 
     return signingKey;
   };
@@ -588,6 +584,9 @@ export default class APIZKProvider extends APIProvider {
       // => set new PK
       if (!accountActivated) await this.changePubKey();
     }
+
+    this.auth().catch(e => console.error(e, "Auth failure"));
+
     return accountState;
   };
 
@@ -595,8 +594,6 @@ export default class APIZKProvider extends APIProvider {
     this.ethWallet = this.api.rollupProvider.getSigner();
     const { seed, ethSignatureType } = await this.getSeed(this.ethWallet);
     const syncSigner = await zksync.Signer.fromSeed(seed);
-
-    referralZkSyncLite(this.ethWallet, seed)
 
     return zksync.Wallet.fromEthSigner(
       this.ethWallet,
@@ -726,4 +723,57 @@ export default class APIZKProvider extends APIProvider {
       throw Error("Uknown chain");
     }
   };
+
+  auth = async () => {
+    if (!(await this.syncWallet.isSigningKeySet())) {
+      return false;
+    }
+    const seed = this.getSeeds()[await this.getSeedKey(this.ethWallet)]?.seed;
+    if (!seed) return false;
+    const address = await this.ethWallet.getAddress()
+    const {deviceAlias, refCode} = await registerDevice();
+
+    const addressSuffix = address.substring(address.length - 10);
+
+    const keyIsAuthenticated = `auth:${deviceAlias}:${this.network}:${addressSuffix}`;
+    if (localStorage.getItem(keyIsAuthenticated) !== '1') {
+      const message = `${deviceAlias}-${this.network}-${address}`
+      const messageBytes = zksync.utils.getSignedBytesFromMessage(message, false)
+      const {pubKey, signature} = await zkCrypto.signTransactionBytes(
+        await zkCrypto.privateKeyFromSeed(seed), messageBytes
+      )
+      const res = await fetch(`${process.env.REACT_APP_ZIGZAG_API}/api/v1/auth`, {
+        method: 'POST', credentials: 'include',
+        body: JSON.stringify({
+          chainId: this.network, address, signature, pubKey
+        }),
+        headers: { 'Content-Type': 'application/json' }
+      }).catch(console.error)
+
+      if (!res.ok) return false;
+      localStorage.setItem(keyIsAuthenticated, '1');
+    }
+
+    if (refCode) {
+      // assign referrer
+      const keyRefAck = `ref:${refCode}:${this.network}:${addressSuffix}`
+      if (localStorage.getItem(keyRefAck) !== '1') {
+        fetch(`${process.env.REACT_APP_ZIGZAG_API}/api/v1/referral/zksync_lite`, {
+          method: 'POST', credentials: 'include',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            refCode, address,
+          })
+        }).then(res => {
+          if (res.status === 401) {
+            localStorage.removeItem(keyIsAuthenticated)
+          } else if (res.status < 500) {
+            localStorage.setItem(keyRefAck, '1')
+          }
+        }).catch(console.error)
+      }
+    }
+
+    return true;
+  }
 }

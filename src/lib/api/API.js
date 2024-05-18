@@ -331,7 +331,7 @@ class API extends Emitter {
   };
 
   calculateServerDelta = async () => {
-    const url = this.apiProvider.websocketUrl.replace("wss", "https");
+    const url = this.apiProvider.websocketUrl.replace("wss:", "https:").replace("ws:", "http:");
     let serverTime, res;
     try {
       res = await axios.get(`${url}/api/v1/time`);

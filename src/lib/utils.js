@@ -283,7 +283,7 @@ export async function registerDevice() {
   }
 
   if (newRefCode || !deviceAlias) {
-    return await fetch(`${process.env.REACT_APP_ZIGZAG_API}/api/v1/referral/reg_device`, {
+    return await fetch(`${process.env.REACT_APP_ZIGZAG_API}/api/v1/reg_device`, {
       method: 'POST', credentials: 'include',
       body: JSON.stringify({refCode: newRefCode}),
       headers: { 'Content-Type': 'application/json' }
@@ -303,39 +303,5 @@ export async function registerDevice() {
       deviceAlias,
       refCode,
     }
-  }
-}
-
-export async function referralZkSyncLite(etherSigner, seed, force) {
-  try {
-    const {refCode} = await registerDevice()
-    if (!refCode ) return
-    const address = (await etherSigner.getAddress()).toLowerCase()
-    const keyCheck = `done:${refCode}:${address.substring(address.length - 10)}`
-    if (!force && localStorage.getItem(keyCheck)) return
-
-    const message = `${refCode}-${address}`
-    const messageBytes = zksync.utils.getSignedBytesFromMessage(message, false)
-    const {pubKey, signature} = await zkCrypto.signTransactionBytes(
-      await zkCrypto.privateKeyFromSeed(seed), messageBytes
-    )
-    fetch(`${process.env.REACT_APP_ZIGZAG_API}/api/v1/referral/zksync_lite`, {
-      method: 'POST', credentials: 'include',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        refCode, address,
-        pubKey, signature
-      })
-    }).then(res => {
-      if (res.ok) {
-        localStorage.setItem(keyCheck, '1')
-      } else if (res.status >= 400 && res.status < 500) {
-        res.json().then(({shouldRetry}) => {
-          if (!shouldRetry) localStorage.setItem(keyCheck, '1')
-        }).catch()
-      }
-    }).catch(console.error)
-  } catch (e) {
-    console.error(e)
   }
 }
