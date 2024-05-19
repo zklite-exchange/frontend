@@ -4,8 +4,9 @@ import styled from "styled-components";
 const Wrapper = styled.div`
   display: grid;
   grid-auto-flow: ${({ row }) => (row ? "row" : "column")};
+    justify-items: center;
   justify-content: ${({ row, left }) =>
-    row || left ? "start" : "space-evenly"};
+     left ? "start" : "space-evenly"};
   align-items: center;
   ${({ row }) => (row ? "row-gap: 20px" : "")};
   ${({ left }) => (left ? "gap: 32px" : "")};

@@ -5,7 +5,8 @@ import Text from "../../atoms/Text/Text";
 
 const StyledText = styled(Text)`
   width: fit-content;
-  padding-bottom: ${({ row }) => (row ? "8px" : "16px")};
+  height: 24px;
+  padding-top: 4px;
   ${({ isActive, theme }) =>
     isActive
       ? `background:

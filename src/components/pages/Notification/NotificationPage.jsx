@@ -39,6 +39,9 @@ export function NotificationPage() {
   useEffect(() => {
     registerDevice().then((res) => setDeviceAlias(res.deviceAlias));
   }, []);
+  useEffect(() => {
+    localStorage.setItem('noti_badge', '0');
+  }, []);
 
   const command = `/notification enable ${deviceAlias}`
   const copyCommand = async () => {

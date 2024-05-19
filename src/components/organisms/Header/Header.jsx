@@ -30,6 +30,7 @@ import {
 } from "react-icons/md";
 import { FaGithub } from "react-icons/fa";
 import { HideMenuOnOutsideClicked, useWindowDimensions } from "lib/utils";
+import CircleBadge from "../../atoms/Tooltip/CircleBadge";
 
 const networkLists = [
   {
@@ -152,8 +153,8 @@ const MenuButtonWrapper = styled.div`
 `;
 
 const NavWrapper = styled.div`
-  display: grid;
-  grid-template-columns: 32px 421px;
+  display: flex;
+  flex-direction: row;
   align-items: center;
 `;
 
@@ -252,6 +253,7 @@ export const Header = (props) => {
   const isEVM = api.isEVMChain();
   const history = useHistory();
   const [index, setIndex] = useState(0);
+  const [showNotificationBadge, setShowNotificationBadge] = useState(false);
   const [networkName, setNetworkName] = useState("");
   const [networkItems, setNetWorkItems] = useState(
     networkLists.filter((n) => n.display)
@@ -259,6 +261,10 @@ export const Header = (props) => {
   const { isDark, toggleTheme } = useTheme();
   const location = useLocation();
   const { t } = useTranslation();
+
+  useEffect(() => {
+    setShowNotificationBadge(localStorage.getItem('noti_badge') !== '0')
+  }, []);
 
   useEffect(() => {
     const netName = networkLists.filter((item, i) => {
@@ -288,21 +294,9 @@ export const Header = (props) => {
       case "/":
         setIndex(0);
         break;
-      // case "/convert":
-      //   setIndex(1);
-      //   break;
-      // case "/bridge":
-      //   setIndex(2);
-      //   break;
-      // case "/list-pair":
-      //   setIndex(3);
-      //   break;
-      // case "/dsl":
-      //   setIndex(4);
-      //   break;
-      // case "/wrap":
-      //   setIndex(5);
-      //   break;
+      case "/notification":
+        setIndex(1);
+        break;
       default:
         setIndex(-1);
         break;
@@ -336,33 +330,15 @@ export const Header = (props) => {
         setIndex(newIndex);
         history.push("/");
         break;
-      // case 1:
-      //   setIndex(newIndex);
-      //   localStorage.setItem("tab_index", newIndex);
-      //   history.push("/convert");
-      //   break;
-      //
-      // case 2:
-      //   // setIndex(newIndex);
-      //   // localStorage.setItem("tab_index", newIndex);
-      //   // history.push("bridge");
-      //   break;
-      // case 3:
-      //   setIndex(newIndex);
-      //   localStorage.setItem("tab_index", newIndex);
-      //   history.push("/list-pair");
-      //   break;
-      // case 4:
-      //   setIndex(newIndex);
-      //   localStorage.setItem("tab_index", newIndex);
-      //   history.push("/dsl");
-      //   break;
-      // case 5:
-      //   window.open(
-      //     "https://app.uniswap.org/#/swap?inputCurrency=ETH&outputCurrency=0x82af49447d8a07e3bd95bd0d56f35241523fbab1&chain=arbitrum",
-      //     "_blank"
-      //   );
-      //   break;
+      case 1:
+        setIndex(newIndex);
+        history.push("/notification");
+        localStorage.setItem('noti_badge', '0');
+        setShowNotificationBadge(false);
+        break;
+      case 2:
+        window.open('https://lite.zksync.io/', "_blank");
+        break;
       default:
         break;
     }
@@ -393,7 +369,9 @@ export const Header = (props) => {
               <ConnectWalletButton />
             )}
             <MenuButtonWrapper ref={navButtonRef} >
-              <MenuIcon onClick={() => setShow(!show)} />
+              <CircleBadge showBadge={showNotificationBadge}>
+                <MenuIcon onClick={() => setShow(!show)} />
+              </CircleBadge>
             </MenuButtonWrapper>
           </ButtonWrapper>
         </>
@@ -401,27 +379,16 @@ export const Header = (props) => {
         <>
           <NavWrapper>
             <Link to="/">
-              <img src={logo_wide} alt="logo" style={{height: '32px', width: 'auto', maxWidth: 'none'}} />
+              <img src={logo_wide} alt="logo" style={{height: '32px', width: '93px', maxWidth: 'none'}} />
             </Link>
             <TabMenu
+              className="grow"
               activeIndex={index}
               onItemClick={handleClick}
-              style={{ paddingTop: "20px" }}
             >
               <Tab>{t("trade")}</Tab>
-              <Tab display={false}>{t("convert")}</Tab>
-              <a href="https://lite.zksync.io/" target="_blank" rel="noreferrer">
-                <Tab display={true}>{t("bridge")}</Tab>
-              </a>
-              <Tab display={false}>{t("list_pair")}</Tab>
-              <Tab display={false}>
-                {t("docs")}
-                <ExternalLinkIcon size={12} />
-              </Tab>
-              <Tab display={isEVM}>
-                {t("wrap")}
-                <ExternalLinkIcon size={12} />
-              </Tab>
+              <Tab><CircleBadge showBadge={showNotificationBadge}>NOTIFICATION</CircleBadge></Tab>
+              <Tab>{t("bridge")} <ExternalLinkIcon size={12} /></Tab>
             </TabMenu>
           </NavWrapper>
           <ActionsWrapper>
@@ -442,6 +409,7 @@ export const Header = (props) => {
             {/*  transparent*/}
             {/*/>*/}
             {/*<VerticalDivider />*/}
+            <VerticalDivider />
             <SocialWrapper>
               {/*<SocialLink*/}
               {/*  target="_blank"*/}
@@ -511,28 +479,17 @@ export const Header = (props) => {
                 adClass="network-dropdown"
                 isMobile={true}
                 style={{ justifySelf: "center"}}
-                width={242}
+                width={200}
                 item={networkItems}
                 context={networkName}
                 clickFunction={changeNetwork}
                 leftIcon={true}
               />
               <LanguageDropdown />
-              <TabMenu  activeIndex={index} onItemClick={handleClick}>
+              <TabMenu row activeIndex={index} onItemClick={handleClick}>
                 <Tab>{t("trade")}</Tab>
-                <Tab display={false}>{t("convert")}</Tab>
-                <a href="https://lite.zksync.io/" target="_blank" rel="noreferrer">
-                  <Tab display={true}>{t("bridge")}</Tab>
-                </a>
-                <Tab display={false}>{t("list_pair")}</Tab>
-                <Tab display={false}>
-                  {t("docs")}
-                  <ExternalLinkIcon size={12} />
-                </Tab>
-                <Tab display={isEVM}>
-                  {t("wrap")}
-                  <ExternalLinkIcon size={12} />
-                </Tab>
+                <Tab><CircleBadge showBadge={showNotificationBadge}>NOTIFICATION</CircleBadge></Tab>
+                <Tab display={true}>{t("bridge")} <ExternalLinkIcon size={12} /></Tab>
               </TabMenu>
               {/*<HorizontalDivider />*/}
               {/* <ActionSideMenuWrapper>
