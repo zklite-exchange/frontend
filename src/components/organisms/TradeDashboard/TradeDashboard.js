@@ -122,7 +122,12 @@ export function TradeDashboard() {
     const queryParams = new URLSearchParams(window.location.search)
     queryParams.set(marketQueryParam, currentMarket)
     queryParams.set(networkQueryParam, networkText)
-    history.push(`/?${queryParams.toString()}`);
+    queryParams.delete("_gl")
+    if (queryParams.has(marketQueryParam)) {
+      history.push(`/?${queryParams.toString()}`);
+    } else {
+      history.replace(`/?${queryParams.toString()}`);
+    }
   }, [network, currentMarket]);
 
   useEffect(() => {
