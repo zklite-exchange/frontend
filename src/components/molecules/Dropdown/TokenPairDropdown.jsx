@@ -75,8 +75,8 @@ const Divider = styled.div`
 `;
 
 const StyledTabMenu = styled(TabMenu)`
-  margin: 20px;
-  border-bottom: 1px solid ${({ theme }) => theme.colors.foreground400};
+  margin: 10px 20px;
+  //border-bottom: 1px solid ${({ theme }) => theme.colors.foreground400};
 `;
 
 const TableContent = styled.div`
@@ -692,6 +692,7 @@ const TokenPairDropdown = ({
               <Tab>{t("stables")}</Tab>
               <Tab>{t("favorites")}</Tab>
             </StyledTabMenu>
+            <Divider />
             <TableContent className="trade_price_btc_table">
               {renderPairs()}
             </TableContent>

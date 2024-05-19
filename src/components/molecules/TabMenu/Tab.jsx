@@ -6,7 +6,7 @@ import Text from "../../atoms/Text/Text";
 const StyledText = styled(Text)`
   width: fit-content;
   height: 24px;
-  padding-top: 4px;
+  align-content: center;
   ${({ isActive, theme }) =>
     isActive
       ? `background:
