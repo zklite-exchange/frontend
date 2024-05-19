@@ -10,6 +10,7 @@ import TradePage from "components/pages/TradePage/TradePage";
 // import BridgePage from "components/pages/BridgePage/BridgePage";
 // import ListPairPage from "components/pages/ListPairPage/ListPairPage";
 import NotFoundPage from "components/pages/NotFoundPage/NotFoundPage";
+import { NotificationPage } from "./components/pages/Notification/NotificationPage";
 
 const AppRoutes = () => {
   const settings = useSelector(settingsSelector);
@@ -32,6 +33,7 @@ const AppRoutes = () => {
       <Router>
         <Switch>
           <Route exact path="/" component={TradePage} />
+          <Route exact path="/notification" component={NotificationPage} />
           {/*<Route exact path="/bridge/:tab?" component={BridgePage} />*/}
           {/*<Route exact path="/list-pair" component={ListPairPage} />*/}
           <Route path="*" component={NotFoundPage} />
