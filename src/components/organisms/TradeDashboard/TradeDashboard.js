@@ -114,16 +114,21 @@ export function TradeDashboard() {
       api.setAPIProvider(chainid);
       api.signOut();
     }
-  }, []);
+  }, [search]);
 
   // Update URL when market or network update
   useEffect(() => {
     const networkText = api.getChainName(network);
     const queryParams = new URLSearchParams(window.location.search)
+    if (currentMarket === queryParams.get(marketQueryParam)
+      && networkText === queryParams.get(networkQueryParam)) {
+      return
+    }
+    const hasMarketParam = queryParams.has(marketQueryParam);
     queryParams.set(marketQueryParam, currentMarket)
     queryParams.set(networkQueryParam, networkText)
     queryParams.delete("_gl")
-    if (queryParams.has(marketQueryParam)) {
+    if (hasMarketParam) {
       history.push(`/?${queryParams.toString()}`);
     } else {
       history.replace(`/?${queryParams.toString()}`);
